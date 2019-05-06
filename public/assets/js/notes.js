@@ -22,13 +22,19 @@ const runNoteQuery = function () {
 
          let $listItem = $("<button  class='list-group-item' type='button' id='noteItem'>");
 
+         // populate delete button for each note
+         let $deleteIcon = $("<i class='fas fa-trash-alt float-right text-dark delete-note'></i>")
+
          $listItem
             .append(
                $("<strong>").text(noteData[i].title),
                //$("<p>").text(noteData[i].created_at)
                )
-            .attr("data-id", noteData[i].id);
-   
+            .attr("data-id", noteData[i].id)
+            .append($deleteIcon);
+         
+         
+
          $noteList.append($listItem);
       }
    })
@@ -134,6 +140,29 @@ $saveNote.on("click", function(){
       
    })
 
+})
+
+
+// delete note - function
+$(document).on("click", ".delete-note", function() {
+   console.log(`delete Clicked!!!`)
+   
+   let noteId = $(this).parent().attr("data-id")
+   console.log(noteId);
+
+   // ajax call to delete
+   $.ajax({
+      url: `/api/notes/` + noteId,
+      type: "DELETE"
+      
+   }).then(function(noteData){
+      
+      console.log(`note deleted`)
+      
+      // refresh the page
+      runNoteQuery();
+      
+   })
 })
 
 

@@ -33,8 +33,8 @@ router.post("/api/notes", function(req, res){
 
 // delete note
 // req.body -> {}
-router.delete("/api/notes", function(req, res) {
-   connection.query("DELETE FROM notes WHERE id = ?", req.body.id, function(err, result) {
+router.delete("/api/notes/:id", function(req, res) {
+   connection.query("DELETE FROM notes WHERE id = ?", req.params.id, function(err, result) {
       if (err) throw err;
 
       console.log("req.body: " + req.body.id);
