@@ -25,7 +25,7 @@ const runNoteQuery = function () {
          $listItem
             .append(
                $("<strong>").text(noteData[i].title),
-               $("<p>").text(noteData[i].created_at)
+               //$("<p>").text(noteData[i].created_at)
                )
             .attr("data-id", noteData[i].id);
    
