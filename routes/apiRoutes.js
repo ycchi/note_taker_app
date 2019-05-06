@@ -3,7 +3,18 @@ const connection = require("../db/connection");
 
 // get all notes
 router.get("/api/notes", function(req, res){
+
    connection.query("SELECT * FROM notes;", function(err, notesDB){
+      if (err) throw err;
+      res.json(notesDB);
+   });
+});
+
+
+// get specific note given an ID
+router.get("/api/notes/:id",  function(req, res){
+   connection.query("SELECT * FROM notes WHERE id = ?;", req.params.id, function(err, notesDB){
+
       if (err) throw err;
       res.json(notesDB);
    });
