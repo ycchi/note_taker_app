@@ -6,6 +6,10 @@ let $title;
 let $body;
 
 const runNoteQuery = function () {
+   
+   // clear note list before running ajax
+   $noteList.empty();
+
    $.ajax({
       url: "/api/notes",
       method: "GET"
@@ -98,6 +102,38 @@ $newNote.on("click", function(){
    $body.one("keypress", function(){
       $(".save-note").css({display: "inline"})
    })
+})
+
+
+// save-note
+let $saveNote = $(".save-note");
+
+$saveNote.on("click", function(){
+   
+   // save contents(title, body) to variable as an object
+   let noteTitleInput = $(".note-title").val().trim();
+   let noteBodyInput = $(".note-textarea").val().trim();
+
+   let newNote = {};
+   newNote.title = noteTitleInput;
+   newNote.body = noteBodyInput;
+
+   console.log(newNote);
+
+   //ajax post method
+   $.ajax({
+      url: `/api/notes/`,
+      method: "POST",
+      data: newNote
+   }).then(function(noteData){
+      
+      console.log(`new note added`)
+      
+      // refresh the page
+      runNoteQuery();
+      
+   })
+
 })
 
 
