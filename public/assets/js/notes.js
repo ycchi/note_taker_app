@@ -1,5 +1,9 @@
+// global variables
+
 let $noteList = $("#noteList");
 let $noteDisplay = $("#noteDisplay");
+let $title;
+let $body;
 
 const runNoteQuery = function () {
    $.ajax({
@@ -37,11 +41,11 @@ function renderNote (dataId) {
    }).then(function(noteData){
       
       
-      let $title = $("<input class='note-title' placeholder='Note Title' maxlength='28' type='text' readonly='true'>");
+      $title = $("<input class='note-title' placeholder='Note Title' maxlength='28' type='text' readonly='true'>");
 
       $title.val(noteData[0]["title"]);
 
-      let $body = $("<textarea class='note-textarea' placeholder='Write your note here' readonly='true' style='min-width: 100%; min-height: 100%'>");
+      $body = $("<textarea class='note-textarea' placeholder='Write your note here' readonly='true' style='min-width: 100%; min-height: 100%'>");
 
       $body.val(noteData[0]["body"])
 
@@ -71,6 +75,39 @@ $(document).on("click", "#noteItem", function() {
 
    renderNote(dataId);
 })
+
+
+// on click on new-note icon to change read-only state to false
+let $newNote = $(".new-note");
+
+$newNote.on("click", function(){
+
+   
+   console.log($title.val());
+   
+   // show placeholder text if $title.val exists
+   $title.val("")
+   $body.val("")
+
+   // change read-only to false
+   $title.attr("readonly", false);
+   $body.attr("readonly", false);
+   
+   // detect key input at the very first instance, ignore rest keypress
+   // show 'save' icon 
+   $body.one("keypress", function(){
+      $(".save-note").css({display: "inline"})
+   })
+})
+
+
+
+
+
+
+
+
+
 
 
 runNoteQuery();

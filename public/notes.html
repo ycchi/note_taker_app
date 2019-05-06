@@ -11,12 +11,12 @@
 </head>
 <body>
    <div class="container">
-         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <a class="navbar-brand" href="#">NOTE TAKER</a>
-                 <form class="form-inline my-2 my-lg-0">
-                   <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                   <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
-                 </form>
+         <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+               <a class="navbar-brand text-light" href="#">NOTE TAKER</a>
+                 <div class="icons">
+                       <i class="fas fa-save text-light save-note" style="display: none;"></i>
+                       <i class="fas fa-pen text-light new-note" style="display: inline;"></i>
+                 </div>
              </nav>
       <div class="row">
          <!-- left column -->
@@ -28,7 +28,9 @@
 
          <!-- right column -->
          <div class="col-12 col-md-8" id="noteDisplay">
-               
+            <input class='note-title' placeholder='Note Title' maxlength='28' type='text' readonly='false'>
+            <hr>
+            <textarea class='note-textarea' placeholder='Write your note here' readonly='false' style='min-width: 100%; min-height: 100%'></textarea>
 
          </div>
       </div>       
